@@ -5,16 +5,20 @@
         <title>Edição de uma canção</title>
     </head>
     <body>
-        <form>
-            <input type="text" 
-                   name="artist" 
-                   value="<?= $song[0]->artist ?>" />
-        </form>
-        <?php
-        echo "<p>ID: {$song[0]->id}</p>";
-        echo "<p>Artista: {$song[0]->artist}</p>";
-        echo "<p>Faixa: {$song[0]->track}</p>";
-        echo "<p>Link: {$song[0]->link}</p>";        
-        ?>
+        <div id="container">
+            <form action="<?php echo URL; ?>songs/updatesong" method="POST">
+                <label>Artist</label>
+                <input type="text" name="artist" value="<?= $song->artist ?>" required />
+                <label>Track</label>
+                <input type="text" name="track" value="<?= $song->track ?>" required />
+                <label>Link</label>
+                <input type="text" name="link" value="<?= $song->link ?>" />
+                <input type="hidden" name="song_id" value="<?= $song->id ?>"/>
+                <input type="submit" name="submit_update_song" value="Update" />
+            </form>
+            <?php
+          
+            ?>
+        </div>
     </body>
 </html>

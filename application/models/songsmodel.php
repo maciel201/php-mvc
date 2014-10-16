@@ -45,7 +45,7 @@ class SongsModel
         // libs/controller.php! If you prefer to get an associative array as the result, then do
         // $query->fetchAll(PDO::FETCH_ASSOC); or change libs/controller.php's PDO options to
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
-        return $query->fetchAll();
+        return $query->fetch();
     }
 
     /**
@@ -78,4 +78,23 @@ class SongsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':song_id' => $song_id));
     }
+      /**
+     * UPDATE A a song IN to database
+       * @param string song_id Artist
+     * @param string $artist Artist
+     * @param string $track Track
+     * @param string $link Link
+     */
+    public function updateSong($song_id,$artist, $track, $link)
+    {
+        // clean the input from javascript code for example
+        $artist = strip_tags($artist);
+        $track = strip_tags($track);
+        $link = strip_tags($link);
+
+        $sql = "UPDATE song SET artist = :artist, track = :track,link = :link WHERE id = :song_id";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':artist' => $artist, ':track' => $track, ':link' => $link, ':song_id'=>$song_id));
+    }
+    
 }
